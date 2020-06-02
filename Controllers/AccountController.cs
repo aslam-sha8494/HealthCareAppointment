@@ -22,7 +22,9 @@ namespace HealthCareAppointment.Controllers
             userregister.RoleList = _unitOfWork.UserRoles.GetRoles().ToList();
             return View(userregister);
         }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult RegisterSave(UserRegisters registerObj)
         {
             if (ModelState.IsValid)
@@ -30,10 +32,12 @@ namespace HealthCareAppointment.Controllers
                 _unitOfWork.UserRegisters.Add(new UserRegisters()
                 {
                     UserName = registerObj.UserName,
+                    FullName = registerObj.FullName,
                     Password = registerObj.Password,
                     ConfirmPassword = registerObj.ConfirmPassword,
+                    PhoneNumber =registerObj.PhoneNumber,
                     RoleId = registerObj.RoleId
-                });
+                }); ;
                 _unitOfWork.Complete();
                 
             }
@@ -53,14 +57,22 @@ namespace HealthCareAppointment.Controllers
             var loginuser = _unitOfWork.UserRegisters.ValidateLoginUsers(UserLoginDetails);
             if (loginuser != null)
             {
-                Session["Username"] = loginuser.UserName;
+                Session["Username"] = loginuser.FullName;
                 Session["UserId"] = loginuser.Id;
                 if (loginuser.RoleId == 1)
                     Session["Role"] = "Admin";
-                else
+                else if (loginuser.RoleId == 2)
                     Session["Role"] = "Doctor";
+                else
+                    Session["Role"] = "Patient";
             }
             return Redirect("/Home/Dashboard");
+        }
+
+        public async Task<ActionResult> GetTaskasync()
+        {
+            var result = await _unitOfWork.UserRegisters.GetAll();
+            return View();
         }
     }
 }

@@ -11,6 +11,16 @@ namespace HealthCareAppointment.HealthCare_BLL
     {
         IRegisterRepository UserRegisters { get; }
         IRoleRepository UserRoles { get; }
+
+        IAppointmentRepository Appointment { get; }
+
+        IDoctorRepository Doctors { get; }
+        IPatientRepository Patient { get; }
+        ISpecializationRepository Specialization { get; }
+        IlocationRepository Locations { get; }
+        IStateRepository States { get; }
+
+        ITimeSlotRepository TimeSlot { get; }
         void Complete();
     }
 }

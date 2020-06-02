@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.ObjectModel;
 
 namespace HealthCareAppointment.HealthCare_BLL.AccountModels
 {
@@ -19,6 +20,11 @@ namespace HealthCareAppointment.HealthCare_BLL.AccountModels
         public string UserName { get; set; }
 
         [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -30,6 +36,10 @@ namespace HealthCareAppointment.HealthCare_BLL.AccountModels
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Required]
+        [StringLength(10, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public string PhoneNumber { get; set; }
+
         [NotMapped]
         public ICollection<UserRoles> RoleList { get; set; }
 
@@ -38,7 +48,10 @@ namespace HealthCareAppointment.HealthCare_BLL.AccountModels
 
         public UserRoles UserRoles { get; set; }
 
-
+        public UserRegisters()
+        {
+            RoleList = new Collection<UserRoles>();
+        }
 
     }
 }

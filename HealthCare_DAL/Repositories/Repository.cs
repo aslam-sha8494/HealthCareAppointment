@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using HealthCareAppointment.HealthCare_BLL.Repositories;
 
 namespace HealthCareAppointment.HealthCare_DAL.Repositories
@@ -22,7 +23,7 @@ namespace HealthCareAppointment.HealthCare_DAL.Repositories
             return Context.Set<TEntity>().Find(id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public async Task<IEnumerable<TEntity>> GetAll()
         {
             // Note that here I've repeated Context.Set<TEntity>() in every method and this is causing
             // too much noise. I could get a reference to the DbSet returned from this method in the 
@@ -35,7 +36,7 @@ namespace HealthCareAppointment.HealthCare_DAL.Repositories
             // 
             // I didn't change it because I wanted the code to look like the videos. But feel free to change
             // this on your own.
-            return Context.Set<TEntity>().ToList();
+            return await Context.Set<TEntity>().ToListAsync();
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
@@ -77,8 +78,10 @@ namespace HealthCareAppointment.HealthCare_DAL.Repositories
             {
                 query = dbSet.Include(includeExpression);
             }
-
-            return query ?? dbSet;
+            if (query == null)
+                return  dbSet;
+            else
+                return query;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using HealthCareAppointment.HealthCare_BLL;
+using HealthCareAppointment.HealthCare_BLL.Models;
 using HealthCareAppointment.HealthCare_BLL.Repositories;
 using HealthCareAppointment.HealthCare_DAL.Repositories;
 
@@ -13,10 +14,28 @@ namespace HealthCareAppointment.HealthCare_DAL
             _applicationDbContext = applicationDbContext;
             UserRegisters = new RegisterRepository(_applicationDbContext);
             UserRoles = new RoleRepository(_applicationDbContext);
+            Locations = new LocationRepository(_applicationDbContext);
+            States = new StateRepository(_applicationDbContext);
+            Appointment = new AppointmentRepository(_applicationDbContext);
+            Doctors = new DoctorRepository(_applicationDbContext);
+            Patient = new PatientRepository(_applicationDbContext);
+            Specialization = new SpecializationRepository(_applicationDbContext);
+            TimeSlot = new TimeSlotRepository(_applicationDbContext);
         }
 
         public IRegisterRepository UserRegisters { get; private set; }
         public IRoleRepository UserRoles { get; private set; }
+
+        public IlocationRepository Locations { get; private set; }
+
+        public IStateRepository States { get; private set; }
+
+        public IAppointmentRepository Appointment { get; private set; }
+        public IDoctorRepository Doctors { get; private set; }
+        public IPatientRepository Patient { get; private set; }
+        public ISpecializationRepository Specialization { get; private set; }
+
+        public ITimeSlotRepository TimeSlot { get; private set; }
 
         public void Complete()
         {
