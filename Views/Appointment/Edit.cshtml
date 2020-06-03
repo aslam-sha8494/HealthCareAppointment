@@ -71,27 +71,31 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Submit" class="btn btn-default" />
+                <input type="submit" value="Rebook Appointment" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="col-md-12">
+    @Html.ActionLink("Appointment", "Appointmentdashboard", "Appointment", new { area = "" }, null)
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/Content/css")
-    <script>
+<script>
         $(document).ready(function () {
-            debugger;
+             $(function () {
+                var result = '@TempData["EditResultMessage"]';
+                if (result != '')
+                    alert(result);
+                    toastr.success("", result);
+            });
+
             $(".date-picker").datepicker({
                 minDate: new date(),
                 maxDate: "+3M +1D"
             });
         });
-    </script>
+</script>
 }

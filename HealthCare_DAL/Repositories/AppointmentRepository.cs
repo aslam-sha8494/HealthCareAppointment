@@ -48,6 +48,20 @@ namespace HealthCareAppointment.HealthCare_DAL.Repositories
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<Appointment> GetAppointmentByDoctorId(int id)
+        {
+            return await ApplicationDbContext.Appointment
+                .Where(d => d.DoctorId == id)
+                .Include(c => c.States)
+                .Include(c => c.Locations)
+                .Include(c => c.Patient)
+                .Include(c => c.Locations)
+                .Include(c => c.TimeSlot)
+                .Include(c => c.Doctors)
+                .Include(c => c.Specialization)
+                .FirstOrDefaultAsync();
+        }
+
         public Appointment GetAppointment(int id)
         {
             return ApplicationDbContext.Appointment.Find(id);

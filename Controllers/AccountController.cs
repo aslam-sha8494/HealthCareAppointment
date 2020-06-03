@@ -1,6 +1,7 @@
 ﻿using HealthCareAppointment.HealthCare_BLL;
 using HealthCareAppointment.HealthCare_BLL.AccountModels;
 using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -10,6 +11,8 @@ namespace HealthCareAppointment.Controllers
     //[Authorize]
     public class AccountController : Controller
     {
+        log4net.ILog logger = log4net.LogManager.GetLogger(typeof(AccountController));
+
         private readonly IUnitOfWork _unitOfWork;
 
         public AccountController(IUnitOfWork unitOfWork)
@@ -18,30 +21,48 @@ namespace HealthCareAppointment.Controllers
         }
         public ActionResult Register()
         {
-            var userregister = new UserRegisters();
-            userregister.RoleList = _unitOfWork.UserRoles.GetRoles().ToList();
-            return View(userregister);
+            try
+            {
+                var userregister = new UserRegisters();
+                userregister.RoleList = _unitOfWork.UserRoles.GetRoles().ToList();
+                return View(userregister);
+            }
+            catch (Exception ex)
+            {
+                logger.Info("Register error : " + ex);
+                logger.Debug(ex);
+                return View("Error");
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult RegisterSave(UserRegisters registerObj)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _unitOfWork.UserRegisters.Add(new UserRegisters()
+                if (ModelState.IsValid)
                 {
-                    UserName = registerObj.UserName,
-                    FullName = registerObj.FullName,
-                    Password = registerObj.Password,
-                    ConfirmPassword = registerObj.ConfirmPassword,
-                    PhoneNumber =registerObj.PhoneNumber,
-                    RoleId = registerObj.RoleId
-                }); ;
-                _unitOfWork.Complete();
-                
+                    _unitOfWork.UserRegisters.Add(new UserRegisters()
+                    {
+                        UserName = registerObj.UserName,
+                        FullName = registerObj.FullName,
+                        Password = registerObj.Password,
+                        ConfirmPassword = registerObj.ConfirmPassword,
+                        PhoneNumber = registerObj.PhoneNumber,
+                        RoleId = registerObj.RoleId
+                    }); ;
+                    _unitOfWork.Complete();
+
+                }
+                return RedirectToAction("Login");
             }
-            return RedirectToAction("Login");
+            catch (Exception ex)
+            {
+                logger.Info("Register error : " + ex);
+                logger.Debug(ex);
+                return View("Error");
+            }
 
         }
 
@@ -52,27 +73,30 @@ namespace HealthCareAppointment.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  ActionResult ValidateLoginUsers(UserRegisters UserLoginDetails)
+        public ActionResult ValidateLoginUsers(UserRegisters UserLoginDetails)
         {
-            var loginuser = _unitOfWork.UserRegisters.ValidateLoginUsers(UserLoginDetails);
-            if (loginuser != null)
+            try
             {
-                Session["Username"] = loginuser.FullName;
-                Session["UserId"] = loginuser.Id;
-                if (loginuser.RoleId == 1)
-                    Session["Role"] = "Admin";
-                else if (loginuser.RoleId == 2)
-                    Session["Role"] = "Doctor";
-                else
-                    Session["Role"] = "Patient";
+                var loginuser = _unitOfWork.UserRegisters.ValidateLoginUsers(UserLoginDetails);
+                if (loginuser != null)
+                {
+                    Session["Username"] = loginuser.FullName;
+                    Session["UserId"] = loginuser.Id;
+                    if (loginuser.RoleId == 1)
+                        Session["Role"] = "Admin";
+                    else if (loginuser.RoleId == 2)
+                        Session["Role"] = "Doctor";
+                    else
+                        Session["Role"] = "Patient";
+                }
+                return Redirect("/Home/Dashboard");
             }
-            return Redirect("/Home/Dashboard");
-        }
-
-        public async Task<ActionResult> GetTaskasync()
-        {
-            var result = await _unitOfWork.UserRegisters.GetAll();
-            return View();
+            catch (Exception ex)
+            {
+                logger.Info("Login error : " + ex);
+                logger.Debug(ex);
+                return View("Error");
+            }
         }
     }
 }

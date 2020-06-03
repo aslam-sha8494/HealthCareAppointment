@@ -11,6 +11,7 @@ namespace HealthCareAppointment.Controllers
 {
     public class LocationController : Controller
     {
+        log4net.ILog logger = log4net.LogManager.GetLogger(typeof(AccountController));
         private readonly IUnitOfWork _unitOfWork;
 
         public LocationController(IUnitOfWork unitOfWork)
@@ -20,35 +21,25 @@ namespace HealthCareAppointment.Controllers
         // GET: Location
         public async Task<ActionResult> Location()
         {
-            var locations = new Locations();
-            var statelist = await _unitOfWork.States.GetAll();
-            locations.StateList = statelist.ToList();
-            return View(locations);
+            try
+            {
+                var locations = new Locations();
+                var statelist = await _unitOfWork.States.GetAll();
+                locations.StateList = statelist.ToList();
+                return View(locations);
+            }
+            catch (Exception ex)
+            {
+                logger.Info("Location error : " + ex);
+                logger.Debug(ex);
+                return View("Error");
+            }
         }
-
-        //public ActionResult Location()
-        //{
-        //    var locations = new Locations();
-        //    //locations.StateList =  _unitOfWork.States.GetStates.to
-        //    return View(locations);
-        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LocationSave()
         {
-            //if (ModelState.IsValid)
-            //{
-            //    _unitOfWork.UserRegisters.Add(new UserRegisters()
-            //    {
-            //        UserName = registerObj.UserName,
-            //        Password = registerObj.Password,
-            //        ConfirmPassword = registerObj.ConfirmPassword,
-            //        RoleId = registerObj.RoleId
-            //    });
-            //    _unitOfWork.Complete();
-
-            //}
             return RedirectToAction("Login");
 
         }

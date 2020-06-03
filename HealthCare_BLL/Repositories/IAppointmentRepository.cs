@@ -13,6 +13,8 @@ namespace HealthCareAppointment.HealthCare_BLL.Repositories
 
         Task<Appointment> GetAppointmentById(int id);
 
+        Task<Appointment> GetAppointmentByDoctorId(int id);
+
         Appointment GetAppointment(int id);
     }
 }

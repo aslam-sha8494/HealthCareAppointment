@@ -33,7 +33,6 @@
         {
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav" style="align-self:flex-end">
-                    <li>@Html.ActionLink("Patient", "Login", "Account", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("Appointment", "Appointmentdashboard", "Appointment", new { area = "" }, null)</li>
                 </ul>
             </div>
@@ -42,6 +41,7 @@
         {
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav" style="align-self:flex-end">
+                    <li>@Html.ActionLink("Patient", "Register", "Account", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("Book Appointment", "Appointment", "Appointment", new { area = "" }, null)</li>
                 </ul>
             </div>
