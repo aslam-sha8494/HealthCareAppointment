@@ -8,6 +8,8 @@ namespace HealthCareAppointment
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                          "~/Scripts/jquery-{version}.js",
                          "~/Scripts/jquery-ui-{version}.js"));
@@ -25,21 +27,23 @@ namespace HealthCareAppointment
                       "~/Scripts/DataTables/jquery.datatables.js",
                       "~/Scripts/DataTables/datatables.bootstrap.js",
                       "~/Scripts/DataTables/dataTables.buttons.js",
-                        "~/Scripts/DataTables/jszip.js",
+                      "~/Scripts/toastr.js",
+                       "~/Scripts/DataTables/jszip.js",
                       "~/Scripts/DataTables/buttons.html5.js",
-                        "~/Scripts/DataTables/buttons.print.js",
+                       "~/Scripts/DataTables/buttons.print.js",
                       "~/Scripts/DataTables/pdfmake.js",
                       "~/Scripts/DataTables/vfs_fonts.js",
                       "~/Scripts/jquery-ui-1.12.1.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/Site.css",
+                      "~/Content/bootstrap.css",                      
                       "~/Content/bootstrap-datepicker.css",
                       "~/Content/DataTables/css/dataTables.bootstrap.css",
                       "~/Content/DataTables/css/buttons.dataTables.css",
+                      "~/Content/toastr.css",
                       "~/Content/themes/base/jquery-ui.min.css",
-                      "~/Content/themes/base/minified/jquery-ui.min.css"));
+                      "~/Content/themes/base/minified/jquery-ui.min.css",
+                      "~/Content/Site.css"));
         }
     }
 }

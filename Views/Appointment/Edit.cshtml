@@ -71,7 +71,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Rebook Appointment" class="btn btn-primary" />
+                <input type="submit" id="reBookAppointment" value="Rebook Appointment" class="btn btn-primary" />
             </div>
         </div>
     </div>
@@ -82,20 +82,14 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-<script>
+    <script>
         $(document).ready(function () {
-             $(function () {
+            $(function () {
                 var result = '@TempData["EditResultMessage"]';
-                if (result != '')
-                    alert(result);
+                if (result != '') {
                     toastr.success("", result);
-            });
-
-            $(".date-picker").datepicker({
-                minDate: new date(),
-                maxDate: "+3M +1D"
+                }
             });
         });
-</script>
+    </script>
 }

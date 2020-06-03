@@ -1,4 +1,5 @@
 ﻿using HealthCareAppointment.HealthCare_BLL;
+using HealthCareAppointment.HealthCare_BLL.Models;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -17,13 +18,14 @@ namespace HealthCareAppointment.Controllers.API
             _unitOfWork = unitOfWork;
         }
 
-        [Route("api/Appointment/GetDoctors")]
+        [Route("api/Appointment/Doctorsbyspecialization")]
         [HttpGet]
-        public HttpResponseMessage GetDoctors()
+        [HealthCareAppointmentCaching_Filter(TimeDuration = 300)]
+        public async Task<HttpResponseMessage> Doctorsbyspecialization()
         {
             try
             {
-                var result = _unitOfWork.Doctors.GetAll();
+                var result = await _unitOfWork.Doctors.GetAll();
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
                 return response;
             }

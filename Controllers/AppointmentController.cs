@@ -94,12 +94,11 @@ namespace HealthCareAppointment.Controllers
                         SpecializationId = appointment.SpecializationId
                     });
                     _unitOfWork.Complete();
-
+                    string result = SendEmail();
+                    TempData["ResultMessage"] = " Appointment booked and mail sent successfully.";
+                    return RedirectToAction("Appointment");
                 }
-                string result = SendEmail();
-                TempData["ResultMessage"] = " Appointment booked and mail sent successfully.";
-                return RedirectToAction("Appointment");
-
+                return View();
             }
             catch (Exception ex)
             {
