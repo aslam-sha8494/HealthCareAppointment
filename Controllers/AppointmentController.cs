@@ -98,7 +98,7 @@ namespace HealthCareAppointment.Controllers
                 }
                 string result = SendEmail();
                 TempData["ResultMessage"] = " Appointment booked and mail sent successfully.";
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("Appointment");
 
             }
             catch (Exception ex)
