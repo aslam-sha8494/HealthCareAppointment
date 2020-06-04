@@ -12,7 +12,10 @@ namespace HealthCareAppointment.Controllers
 {
     public class AppointmentController : Controller
     {
+        #region Initialization
+
         log4net.ILog logger = log4net.LogManager.GetLogger(typeof(AppointmentController));
+       
         private readonly IUnitOfWork _unitOfWork;
 
         public AppointmentController(IUnitOfWork unitOfWork)
@@ -20,23 +23,16 @@ namespace HealthCareAppointment.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        #endregion
+
+        #region Dashboard
+
         public async Task<ActionResult> Appointmentdashboard()
         {
             try
             {
-                //if (@Session["Role"].ToString() == "Admin")
-                //{
-                    var appointments = await _unitOfWork.Appointment.GetAllAppointments();
-                    return View(appointments);
-                //}
-                //else
-                //{
-                //    int doctorid = 3;
-                //    var appointments = await _unitOfWork.Appointment.GetAppointmentByDoctorId(doctorid);
-                //    return View(appointments);
-                //}
-
-
+                var appointments = await _unitOfWork.Appointment.GetAllAppointments();
+                return View(appointments);
             }
             catch (Exception ex)
             {
@@ -46,7 +42,10 @@ namespace HealthCareAppointment.Controllers
             }
         }
 
-        // GET: Appointment
+        #endregion
+
+        #region Appointmentcreate
+
         public async Task<ActionResult> Appointment()
         {
             try
@@ -138,6 +137,10 @@ namespace HealthCareAppointment.Controllers
             return result;
         }
 
+        #endregion
+
+        #region AppointmentEdit
+
         public async Task<ActionResult> Edit(int id)
         {
             try
@@ -193,6 +196,9 @@ namespace HealthCareAppointment.Controllers
             }
         }
 
+        #endregion
+
+        #region AppointmentDelete
         public ActionResult Deleteappointment(int id)
         {
             try
@@ -211,6 +217,6 @@ namespace HealthCareAppointment.Controllers
             }
         }
 
-
+        #endregion
     }
 }

@@ -3,19 +3,19 @@ namespace HealthCareAppointment.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class addedinitialmodelclasses : DbMigration
+    public partial class InitialAllModelClasses : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.AspNetRoles",
-                c => new
-                {
-                    Id = c.String(nullable: false, maxLength: 128),
-                    Name = c.String(nullable: false, maxLength: 256),
-                })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+               "dbo.AspNetRoles",
+               c => new
+               {
+                   Id = c.String(nullable: false, maxLength: 128),
+                   Name = c.String(nullable: false, maxLength: 256),
+               })
+               .PrimaryKey(t => t.Id)
+               .Index(t => t.Name, unique: true, name: "RoleNameIndex");
 
             CreateTable(
                 "dbo.AspNetUserRoles",
@@ -186,33 +186,32 @@ namespace HealthCareAppointment.Migrations
                 .Index(t => t.LocationId);
 
             CreateTable(
-                "dbo.Appointments",
-                c => new
-                {
-                    AppointmentId = c.Int(nullable: false, identity: true),
-                    AppointmentDate = c.DateTime(nullable: false),
-                    Status = c.Int(nullable: false),
-                    StateId = c.Int(nullable: false),
-                    LocationId = c.Int(nullable: false),
-                    DoctorId = c.Int(nullable: false),
-                    PatientId = c.Int(nullable: false),
-                    TimeSlotId = c.Int(nullable: false),
-                    SpecializationId = c.Int(nullable: false),
-                })
-                .PrimaryKey(t => t.AppointmentId)
-                .ForeignKey("dbo.Doctors", t => t.DoctorId, cascadeDelete: true)
-                .ForeignKey("dbo.Locations", t => t.LocationId, cascadeDelete: true)
-                .ForeignKey("dbo.Patients", t => t.PatientId, cascadeDelete: true)
-                .ForeignKey("dbo.Specializations", t => t.SpecializationId, cascadeDelete: true)
-                .ForeignKey("dbo.States", t => t.StateId, cascadeDelete: true)
-                .ForeignKey("dbo.TimeSlots", t => t.TimeSlotId, cascadeDelete: true)
-                .Index(t => t.StateId)
-                .Index(t => t.LocationId)
-                .Index(t => t.DoctorId)
-                .Index(t => t.PatientId)
-                .Index(t => t.TimeSlotId)
-                .Index(t => t.SpecializationId);
-
+                 "dbo.Appointments",
+                 c => new
+                 {
+                     AppointmentId = c.Int(nullable: false, identity: true),
+                     AppointmentDate = c.DateTime(nullable: false),
+                     Status = c.Int(nullable: false),
+                     StateId = c.Int(nullable: false),
+                     LocationId = c.Int(nullable: false),
+                     DoctorId = c.Int(nullable: false),
+                     PatientId = c.Int(nullable: false),
+                     TimeSlotId = c.Int(nullable: false),
+                     SpecializationId = c.Int(nullable: false),
+                 })
+                 .PrimaryKey(t => t.AppointmentId)
+                 .ForeignKey("dbo.Doctors", t => t.DoctorId, cascadeDelete: true)
+                 .ForeignKey("dbo.Locations", t => t.LocationId, cascadeDelete: true)
+                 .ForeignKey("dbo.Patients", t => t.PatientId, cascadeDelete: true)
+                 .ForeignKey("dbo.Specializations", t => t.SpecializationId, cascadeDelete: true)
+                 .ForeignKey("dbo.States", t => t.StateId, cascadeDelete: true)
+                 .ForeignKey("dbo.TimeSlots", t => t.TimeSlotId, cascadeDelete: true)
+                 .Index(t => t.StateId)
+                 .Index(t => t.LocationId)
+                 .Index(t => t.DoctorId)
+                 .Index(t => t.PatientId)
+                 .Index(t => t.TimeSlotId)
+                 .Index(t => t.SpecializationId);
         }
         
         public override void Down()

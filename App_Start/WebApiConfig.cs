@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace HealthCareAppointment
 {
@@ -8,10 +9,16 @@ namespace HealthCareAppointment
     {
         public static void Register(HttpConfiguration config)
         {
-            //camel notations
+            //for camel notations
             var settings = config.Formatters.JsonFormatter.SerializerSettings;
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             settings.Formatting = Formatting.Indented;
+
+            //string origin = "http://localhost:50164/IDGWebClient/";
+            //EnableCorsAttribute cors = new EnableCorsAttribute(origin, "*", "GET,POST");
+            //config.EnableCors(cors);
+
+            config.EnableCors();
 
             // Web API routes
             config.MapHttpAttributeRoutes();

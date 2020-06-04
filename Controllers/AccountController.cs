@@ -1,6 +1,5 @@
 ﻿using HealthCareAppointment.HealthCare_BLL;
 using HealthCareAppointment.HealthCare_BLL.AccountModels;
-using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,6 +10,8 @@ namespace HealthCareAppointment.Controllers
     //[Authorize]
     public class AccountController : Controller
     {
+        #region Initialization
+
         log4net.ILog logger = log4net.LogManager.GetLogger(typeof(AccountController));
 
         private readonly IUnitOfWork _unitOfWork;
@@ -19,12 +20,18 @@ namespace HealthCareAppointment.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-        public ActionResult Register()
+
+        #endregion
+
+        #region Register
+
+        public ViewResult Register()
         {
             try
             {
                 var userregister = new UserRegisters();
-                userregister.RoleList = _unitOfWork.UserRoles.GetRoles().ToList();
+                var roleresult = _unitOfWork.UserRoles.GetRoles();
+                userregister.RoleList = roleresult.ToList();
                 return View(userregister);
             }
             catch (Exception ex)
@@ -66,6 +73,10 @@ namespace HealthCareAppointment.Controllers
 
         }
 
+        #endregion
+
+        #region Login
+
         public ActionResult Login()
         {
             return View();
@@ -73,11 +84,11 @@ namespace HealthCareAppointment.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ValidateLoginUsers(UserRegisters UserLoginDetails)
+        public async Task<ActionResult> ValidateLoginUsers(UserRegisters UserLoginDetails)
         {
             try
             {
-                var loginuser = _unitOfWork.UserRegisters.ValidateLoginUsers(UserLoginDetails);
+                var loginuser = await _unitOfWork.UserRegisters.ValidateLoginUsers(UserLoginDetails);
                 if (loginuser != null)
                 {
                     Session["Username"] = loginuser.FullName;
@@ -98,5 +109,9 @@ namespace HealthCareAppointment.Controllers
                 return View("Error");
             }
         }
+
+        #endregion
+
+
     }
 }

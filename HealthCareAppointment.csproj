@@ -112,6 +112,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -119,6 +122,9 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Cors.5.2.7\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -250,6 +256,7 @@
     <Compile Include="HealthCare_BLL\AccountModels\UserRegisters.cs" />
     <Compile Include="HealthCare_BLL\AccountModels\UserRoles.cs" />
     <Compile Include="HealthCare_BLL\IUnitOfWork.cs" />
+    <Compile Include="HealthCare_BLL\Models\Logactionexecutionfilter.cs" />
     <Compile Include="HealthCare_BLL\Models\ApplicationUser.cs" />
     <Compile Include="HealthCare_BLL\Models\Appointment.cs" />
     <Compile Include="HealthCare_BLL\Models\HealthCareAppointmentCaching_Filter.cs" />
@@ -283,13 +290,13 @@
     <Compile Include="HealthCare_DAL\Repositories\StateRepository.cs" />
     <Compile Include="HealthCare_DAL\Repositories\TimeSlotRepository.cs" />
     <Compile Include="HealthCare_DAL\UnitOfWork.cs" />
-    <Compile Include="Migrations\202006020752409_addedinitialmodelclasses.cs" />
-    <Compile Include="Migrations\202006020752409_addedinitialmodelclasses.Designer.cs">
-      <DependentUpon>202006020752409_addedinitialmodelclasses.cs</DependentUpon>
+    <Compile Include="Migrations\202006040726442_InitialAllModelClasses.cs" />
+    <Compile Include="Migrations\202006040726442_InitialAllModelClasses.Designer.cs">
+      <DependentUpon>202006040726442_InitialAllModelClasses.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006020755273_addedmasterdata.cs" />
-    <Compile Include="Migrations\202006020755273_addedmasterdata.Designer.cs">
-      <DependentUpon>202006020755273_addedmasterdata.cs</DependentUpon>
+    <Compile Include="Migrations\202006040730038_AddedMasterData.cs" />
+    <Compile Include="Migrations\202006040730038_AddedMasterData.Designer.cs">
+      <DependentUpon>202006040730038_AddedMasterData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -745,12 +752,13 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_AdminNav.cshtml" />
     <Content Include="Views\Shared\_DoctorNav.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Location\Location.cshtml" />
     <Content Include="Views\Appointment\Appointment.cshtml" />
     <Content Include="Views\Appointment\Appointmentdashboard.cshtml" />
     <Content Include="Views\Appointment\Edit.cshtml" />
+    <Content Include="Views\Shared\_HealthcareAppointmentHeader.cshtml" />
+    <Content Include="Views\Shared\_HealthcareAppointmentFooter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -787,11 +795,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006020752409_addedinitialmodelclasses.resx">
-      <DependentUpon>202006020752409_addedinitialmodelclasses.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006040726442_InitialAllModelClasses.resx">
+      <DependentUpon>202006040726442_InitialAllModelClasses.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006020755273_addedmasterdata.resx">
-      <DependentUpon>202006020755273_addedmasterdata.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006040730038_AddedMasterData.resx">
+      <DependentUpon>202006040730038_AddedMasterData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

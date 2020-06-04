@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using HealthCareAppointment.HealthCare_BLL.AccountModels;
 using HealthCareAppointment.HealthCare_BLL.Repositories;
 
@@ -12,14 +13,14 @@ namespace HealthCareAppointment.HealthCare_DAL.Repositories
             : base(context)
         {
         }
-        public IEnumerable<UserRegisters> GetRegisters(int Id)
+        public async Task<IEnumerable<UserRegisters>> GetRegisters(int Id)
         {
-            return ApplicationDbContext.UserRegisters.Where(n=>n.Id == Id).ToList();
+            return await ApplicationDbContext.UserRegisters.Where(n=>n.Id == Id).ToListAsync();
         }
 
-        public UserRegisters ValidateLoginUsers(UserRegisters UserLoginDetails)
+        public async Task<UserRegisters> ValidateLoginUsers(UserRegisters UserLoginDetails)
         {
-            return ApplicationDbContext.UserRegisters.Where(n => n.UserName == UserLoginDetails.UserName && n.Password == UserLoginDetails.Password).FirstOrDefault();
+            return await ApplicationDbContext.UserRegisters.Where(n => n.UserName == UserLoginDetails.UserName && n.Password == UserLoginDetails.Password).FirstOrDefaultAsync();
         }
 
         public ApplicationDbContext ApplicationDbContext

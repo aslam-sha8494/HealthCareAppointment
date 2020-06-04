@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using HealthCareAppointment.HealthCare_BLL.Models;
+using System.Web;
 using System.Web.Mvc;
 
 namespace HealthCareAppointment
@@ -8,6 +9,7 @@ namespace HealthCareAppointment
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new Logactionexecutionfilter());
         }
     }
 }

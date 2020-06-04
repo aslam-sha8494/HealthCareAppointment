@@ -3,7 +3,7 @@ namespace HealthCareAppointment.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class addedmasterdata : DbMigration
+    public partial class AddedMasterData : DbMigration
     {
         public override void Up()
         {

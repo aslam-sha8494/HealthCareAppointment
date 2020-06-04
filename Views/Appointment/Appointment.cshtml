@@ -78,12 +78,14 @@
         </div>
     </div>
 }
+<div class="col-md-12">
+    @Html.ActionLink("Back", "Dashboard", "Home", new { area = "" }, null)
+</div>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-            debugger;
-            $(function () {
+             $(function () {
                 var result = '@TempData["ResultMessage"]';
                 if (result != '') {
                     toastr.success("", result);

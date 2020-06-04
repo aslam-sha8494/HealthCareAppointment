@@ -9,8 +9,8 @@ namespace HealthCareAppointment.HealthCare_BLL
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRegisterRepository UserRegisters { get; }
-        IRoleRepository UserRoles { get; }
+        IRegisterRepository UserRegisters { get; set; }
+        IRoleRepository UserRoles { get; set; }
 
         IAppointmentRepository Appointment { get; }
 

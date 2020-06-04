@@ -9,6 +9,17 @@ namespace HealthCareAppointment.HealthCare_DAL
     {
         private readonly ApplicationDbContext _applicationDbContext;
 
+        //public UnitOfWork()
+        //{
+        //    UserRegisters = new RegisterRepository(_applicationDbContext);
+        //    UserRoles = new RoleRepository(_applicationDbContext);
+
+        //    Appointment = new AppointmentRepository(_applicationDbContext);
+        //    Doctors = new DoctorRepository(_applicationDbContext);
+        //    Patient = new PatientRepository(_applicationDbContext);
+        //    Specialization = new SpecializationRepository(_applicationDbContext);
+        //    TimeSlot = new TimeSlotRepository(_applicationDbContext);
+        //}
         public UnitOfWork(ApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
@@ -23,8 +34,8 @@ namespace HealthCareAppointment.HealthCare_DAL
             TimeSlot = new TimeSlotRepository(_applicationDbContext);
         }
 
-        public IRegisterRepository UserRegisters { get; private set; }
-        public IRoleRepository UserRoles { get; private set; }
+        public IRegisterRepository UserRegisters { get; set; }
+        public IRoleRepository UserRoles { get; set; }
 
         public IlocationRepository Locations { get; private set; }
 

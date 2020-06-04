@@ -7,13 +7,13 @@ namespace HealthCareAppointment.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addedinitialmodelclasses : IMigrationMetadata
+    public sealed partial class AddedMasterData : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addedinitialmodelclasses));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedMasterData));
         
         string IMigrationMetadata.Id
         {
-            get { return "202006020752409_addedinitialmodelclasses"; }
+            get { return "202006040730038_AddedMasterData"; }
         }
         
         string IMigrationMetadata.Source

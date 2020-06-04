@@ -5,9 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace HealthCareAppointment.Controllers.API
 {
+    [EnableCors(origins: "https://localhost:44386", headers: "*", methods: "*")]
     public class AppointmentController : ApiController
     {
         log4net.ILog logger = log4net.LogManager.GetLogger(typeof(AccountController));
@@ -36,6 +38,17 @@ namespace HealthCareAppointment.Controllers.API
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest);
                 return response;
             }
+        }
+
+        [DisableCors]
+        //[OutputCache(Duration =100)]
+        public IHttpActionResult Checkunittesting(int id)
+        {
+            if (id == 0)
+                return NotFound();
+            else
+                return Ok();
+
         }
     }
 }
