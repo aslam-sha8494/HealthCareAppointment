@@ -11,6 +11,8 @@ namespace HealthCareAppointment.HealthCare_BLL.Repositories
     {
         Task<IEnumerable<UserRegisters>> GetRegisters(int Id);
 
+        Task<IEnumerable<UserRegisters>> GetDoctorBasedOnRole(int _iRoleId);
+
         Task<UserRegisters> ValidateLoginUsers(UserRegisters UserLoginDetails);
     }
 }

@@ -15,7 +15,12 @@ namespace HealthCareAppointment.HealthCare_DAL.Repositories
         }
         public async Task<IEnumerable<UserRegisters>> GetRegisters(int Id)
         {
-            return await ApplicationDbContext.UserRegisters.Where(n=>n.RegisterId == Id).ToListAsync();
+            return await ApplicationDbContext.UserRegisters.Where(n => n.RegisterId == Id).ToListAsync();
+        }
+
+        public async Task<IEnumerable<UserRegisters>> GetDoctorBasedOnRole(int _iRoleId)
+        {
+            return await ApplicationDbContext.UserRegisters.Where(n => n.RoleId == _iRoleId).ToListAsync();
         }
 
         public async Task<UserRegisters> ValidateLoginUsers(UserRegisters UserLoginDetails)

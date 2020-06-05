@@ -9,13 +9,13 @@ namespace HealthCareAppointment
         public static void RegisterBundles(BundleCollection bundles)
         {
 
-
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                          "~/Scripts/jquery-{version}.js",
                          "~/Scripts/jquery-ui-{version}.js"));
 
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                     "~/Scripts/jquery.validate*"));
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -32,11 +32,12 @@ namespace HealthCareAppointment
                       "~/Scripts/DataTables/buttons.html5.js",
                        "~/Scripts/DataTables/buttons.print.js",
                       "~/Scripts/DataTables/pdfmake.js",
-                      "~/Scripts/DataTables/vfs_fonts.js",
-                      "~/Scripts/jquery-ui-1.12.1.min.js"));
+                      "~/Scripts/DataTables/vfs_fonts.js"
+                      ));
+
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",                      
+                      "~/Content/bootstrap.css",
                       "~/Content/bootstrap-datepicker.css",
                       "~/Content/DataTables/css/dataTables.bootstrap.css",
                       "~/Content/DataTables/css/buttons.dataTables.css",

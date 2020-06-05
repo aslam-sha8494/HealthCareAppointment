@@ -192,7 +192,7 @@ namespace HealthCareAppointment.Controllers
                 appointmentresult.SpecializationId = appointment.SpecializationId;
                 appointmentresult.DoctorId = appointment.DoctorId;
                 appointmentresult.TimeSlotId = appointment.TimeSlotId;
-                appointmentresult.AppointmentDate = appointment.AppointmentDate;
+                appointmentresult.AppointmentDate = Convert.ToString(appointment.AppointmentDate) == "" ? DateTime.Now : appointment.AppointmentDate;
 
                 _unitOfWork.Complete();
                 TempData["EditResultMessage"] = " Appointment updated successfully.";

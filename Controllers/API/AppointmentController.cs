@@ -9,7 +9,7 @@ using System.Web.Http.Cors;
 
 namespace HealthCareAppointment.Controllers.API
 {
-    [EnableCors(origins: "https://localhost:44386", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AppointmentController : ApiController
     {
         log4net.ILog logger = log4net.LogManager.GetLogger(typeof(AppointmentController));
