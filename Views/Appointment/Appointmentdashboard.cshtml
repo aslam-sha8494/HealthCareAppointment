@@ -42,12 +42,12 @@
                     {
                         <tr>
                             <td>@item.AppointmentId</td>
-                            <td>@item.Patient.PatientName</td>
-                            <td>@item.Patient.Phone</td>
+                            <td>@item.UserRegisters.FullName</td>
+                            <td>@item.UserRegisters.PhoneNumber</td>
                             <td>@item.AppointmentDate.ToString("MMM")-@item.AppointmentDate.ToString("d ")-@item.AppointmentDate.ToString("yyyy")</td>
                             <td>@item.TimeSlot.SlotTime</td>
                             <td>@item.Doctors.DoctorName</td>
-                            <td>@item.Doctors.Specialization.SpecializationName</td>
+                            <td>@item.Specialization.SpecializationName</td>
                             <td>
                                 @{
                                     if (item.Status.ToString() == "1")

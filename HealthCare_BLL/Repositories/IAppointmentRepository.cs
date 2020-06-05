@@ -11,9 +11,11 @@ namespace HealthCareAppointment.HealthCare_BLL.Repositories
     {
         Task<IEnumerable<Appointment>> GetAllAppointments();
 
-        Task<Appointment> GetAppointmentById(int id);
+        Task<IEnumerable<Appointment>> GetAppointmentByPatientId(int _iPatientid);
 
-        Task<Appointment> GetAppointmentByDoctorId(int id);
+        Task<IEnumerable<Appointment>> GetAppointmentByDoctorId(int _iDoctorid);
+
+        Task<Appointment> GetAppointmentById(int _Appointmentid);       
 
         Appointment GetAppointment(int id);
     }

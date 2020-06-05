@@ -26,39 +26,53 @@ namespace HealthCareAppointment.HealthCare_DAL.Repositories
             return await ApplicationDbContext.Appointment
                 .Include(c => c.States)
                 .Include(c => c.Locations)
-                .Include(c => c.Patient)
                 .Include(c => c.Locations)
                 .Include(c => c.TimeSlot)
                 .Include(c => c.Doctors)
                 .Include(c => c.Specialization)
+                .Include(c=>c.UserRegisters)
                 .ToListAsync();
         }
 
-        public async Task<Appointment> GetAppointmentById(int id)
+        public async Task<IEnumerable<Appointment>> GetAppointmentByPatientId(int _iPatientId)
         {
             return await ApplicationDbContext.Appointment
-                .Where(d => d.AppointmentId == id)
+                .Where(d => d.RegisterId == _iPatientId)
                 .Include(c => c.States)
                 .Include(c => c.Locations)
-                .Include(c => c.Patient)
                 .Include(c => c.Locations)
                 .Include(c => c.TimeSlot)
                 .Include(c => c.Doctors)
                 .Include(c => c.Specialization)
-                .FirstOrDefaultAsync();
+                .Include(c => c.UserRegisters)
+                .ToListAsync();
         }
 
-        public async Task<Appointment> GetAppointmentByDoctorId(int id)
+        public async Task<IEnumerable<Appointment>> GetAppointmentByDoctorId(int _iDoctorid)
         {
             return await ApplicationDbContext.Appointment
-                .Where(d => d.DoctorId == id)
+                .Where(d => d.DoctorId == _iDoctorid)
                 .Include(c => c.States)
                 .Include(c => c.Locations)
-                .Include(c => c.Patient)
                 .Include(c => c.Locations)
                 .Include(c => c.TimeSlot)
                 .Include(c => c.Doctors)
                 .Include(c => c.Specialization)
+                .Include(c => c.UserRegisters)
+                .ToListAsync();
+        }
+
+        public async Task<Appointment> GetAppointmentById(int _Appointmentid)
+        {
+            return await ApplicationDbContext.Appointment
+                .Where(d => d.AppointmentId == _Appointmentid)
+                .Include(c => c.States)
+                .Include(c => c.Locations)
+                .Include(c => c.Locations)
+                .Include(c => c.TimeSlot)
+                .Include(c => c.Doctors)
+                .Include(c => c.Specialization)
+                .Include(c => c.UserRegisters)
                 .FirstOrDefaultAsync();
         }
 

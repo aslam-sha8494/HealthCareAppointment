@@ -47,12 +47,11 @@
                 @Html.ValidationMessageFor(m => m.DoctorId, string.Empty, new { @class = "" })
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.PatientId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AppointmentDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.PatientId, new SelectList(Model.PatientList, "PatientId", "PatientName"), "Select Patient", new { @class = "form-control", id = "PatientId" })
-                @Html.ValidationMessageFor(m => m.PatientId, string.Empty, new { @class = "" })
+                @Html.EditorFor(model => model.AppointmentDate, new { htmlAttributes = new { @class = "date-picker" } })
+                @Html.ValidationMessageFor(model => model.AppointmentDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -61,13 +60,6 @@
             <div class="col-md-10">
                 @Html.DropDownListFor(m => m.TimeSlotId, new SelectList(Model.TimeSlotList, "TimeSlotId", "SlotTime"), "Select TimeSlot", new { @class = "form-control", id = "SlotTime" })
                 @Html.ValidationMessageFor(m => m.TimeSlotId, string.Empty, new { @class = "" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.AppointmentDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AppointmentDate, new { htmlAttributes = new { @class = "date-picker" } })
-                @Html.ValidationMessageFor(model => model.AppointmentDate, "", new { @class = "text-danger" })
             </div>
         </div>
 

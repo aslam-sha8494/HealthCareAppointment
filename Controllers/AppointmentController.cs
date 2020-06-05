@@ -15,7 +15,6 @@ namespace HealthCareAppointment.Controllers
         #region Initialization
 
         log4net.ILog logger = log4net.LogManager.GetLogger(typeof(AppointmentController));
-       
         private readonly IUnitOfWork _unitOfWork;
 
         public AppointmentController(IUnitOfWork unitOfWork)
@@ -31,8 +30,23 @@ namespace HealthCareAppointment.Controllers
         {
             try
             {
-                var appointments = await _unitOfWork.Appointment.GetAllAppointments();
-                return View(appointments);
+                string _strRole = (string)Session["Role"];
+                int id = (int)Session["UserId"];
+                if (_strRole == "Admin")
+                {
+                    var appointments = await _unitOfWork.Appointment.GetAllAppointments();
+                    return View(appointments);
+                }
+                else if (_strRole == "Doctor")
+                {
+                    var appointments = await _unitOfWork.Appointment.GetAppointmentByDoctorId(id);
+                    return View(appointments);
+                }
+                else
+                {
+                    var appointments = await _unitOfWork.Appointment.GetAppointmentByPatientId(id);
+                    return View(appointments);
+                }
             }
             catch (Exception ex)
             {
@@ -57,8 +71,6 @@ namespace HealthCareAppointment.Controllers
                 appointment.LocationList = locationlist.ToList();
                 var doctorlist = await _unitOfWork.Doctors.GetAll();
                 appointment.DoctorList = doctorlist.ToList();
-                var patientlist = await _unitOfWork.Patient.GetAll();
-                appointment.PatientList = patientlist.ToList();
                 var timeslot = await _unitOfWork.TimeSlot.GetAll();
                 appointment.TimeSlotList = timeslot.ToList();
                 var specializationlist = await _unitOfWork.Specialization.GetAll();
@@ -81,17 +93,18 @@ namespace HealthCareAppointment.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    int _iPatientid = (int)Session["UserId"];
                     _unitOfWork.Appointment.Add(new Appointment()
                     {
                         AppointmentDate = appointment.AppointmentDate,
                         StateId = appointment.StateId,
                         LocationId = appointment.LocationId,
                         DoctorId = appointment.DoctorId,
-                        PatientId = appointment.PatientId,
                         TimeSlotId = appointment.TimeSlotId,
                         Status = 1,
-                        SpecializationId = appointment.SpecializationId
-                    });
+                        SpecializationId = appointment.SpecializationId,
+                        RegisterId = _iPatientid
+                    }); ;
                     _unitOfWork.Complete();
                     string result = SendEmail();
                     TempData["ResultMessage"] = " Appointment booked and mail sent successfully.";
@@ -153,8 +166,6 @@ namespace HealthCareAppointment.Controllers
                 appointment.LocationList = locationlist.ToList();
                 var doctorlist = await _unitOfWork.Doctors.GetAll();
                 appointment.DoctorList = doctorlist.ToList();
-                var patientlist = await _unitOfWork.Patient.GetAll();
-                appointment.PatientList = patientlist.ToList();
                 var timeslot = await _unitOfWork.TimeSlot.GetAll();
                 appointment.TimeSlotList = timeslot.ToList();
                 var specializationlist = await _unitOfWork.Specialization.GetAll();
@@ -180,7 +191,6 @@ namespace HealthCareAppointment.Controllers
                 appointmentresult.LocationId = appointment.LocationId;
                 appointmentresult.SpecializationId = appointment.SpecializationId;
                 appointmentresult.DoctorId = appointment.DoctorId;
-                appointmentresult.PatientId = appointment.PatientId;
                 appointmentresult.TimeSlotId = appointment.TimeSlotId;
                 appointmentresult.AppointmentDate = appointment.AppointmentDate;
 

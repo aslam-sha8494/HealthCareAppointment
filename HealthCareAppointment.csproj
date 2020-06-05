@@ -290,13 +290,13 @@
     <Compile Include="HealthCare_DAL\Repositories\StateRepository.cs" />
     <Compile Include="HealthCare_DAL\Repositories\TimeSlotRepository.cs" />
     <Compile Include="HealthCare_DAL\UnitOfWork.cs" />
-    <Compile Include="Migrations\202006040726442_InitialAllModelClasses.cs" />
-    <Compile Include="Migrations\202006040726442_InitialAllModelClasses.Designer.cs">
-      <DependentUpon>202006040726442_InitialAllModelClasses.cs</DependentUpon>
+    <Compile Include="Migrations\202006050317263_addedmodelclasses.cs" />
+    <Compile Include="Migrations\202006050317263_addedmodelclasses.Designer.cs">
+      <DependentUpon>202006050317263_addedmodelclasses.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006040730038_AddedMasterData.cs" />
-    <Compile Include="Migrations\202006040730038_AddedMasterData.Designer.cs">
-      <DependentUpon>202006040730038_AddedMasterData.cs</DependentUpon>
+    <Compile Include="Migrations\202006050323396_addedMasterdata.cs" />
+    <Compile Include="Migrations\202006050323396_addedMasterdata.Designer.cs">
+      <DependentUpon>202006050323396_addedMasterdata.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -795,11 +795,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006040726442_InitialAllModelClasses.resx">
-      <DependentUpon>202006040726442_InitialAllModelClasses.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006050317263_addedmodelclasses.resx">
+      <DependentUpon>202006050317263_addedmodelclasses.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006040730038_AddedMasterData.resx">
-      <DependentUpon>202006040730038_AddedMasterData.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006050323396_addedMasterdata.resx">
+      <DependentUpon>202006050323396_addedMasterdata.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

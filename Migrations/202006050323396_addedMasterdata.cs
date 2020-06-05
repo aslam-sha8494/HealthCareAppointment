@@ -2,8 +2,8 @@ namespace HealthCareAppointment.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
-    public partial class AddedMasterData : DbMigration
+
+    public partial class addedMasterdata : DbMigration
     {
         public override void Up()
         {
@@ -49,7 +49,7 @@ namespace HealthCareAppointment.Migrations
                "Insert into Patients (PatientName,Sex,BirthDate,Phone,StateId,LocationId,Address,Datetime)values('Logeshwari','2','19APR1994','9876234098','1','1','Velachery',Getdate())" +
                "Insert into Patients (PatientName,Sex,BirthDate,Phone,StateId,LocationId,Address,Datetime)values('Vishnu','1','01JUN2005','9876230961','1','1','Velachery',Getdate())");
         }
-        
+
         public override void Down()
         {
         }

@@ -58,9 +58,9 @@ namespace HealthCareAppointment.Controllers
                         ConfirmPassword = registerObj.ConfirmPassword,
                         PhoneNumber = registerObj.PhoneNumber,
                         RoleId = registerObj.RoleId
-                    }); ;
+                    }); 
                     _unitOfWork.Complete();
-
+                    TempData["RegisterResultMessage"] = "Registered successfully. Kindly Login";
                 }
                 return RedirectToAction("Login");
             }
@@ -92,7 +92,7 @@ namespace HealthCareAppointment.Controllers
                 if (loginuser != null)
                 {
                     Session["Username"] = loginuser.FullName;
-                    Session["UserId"] = loginuser.Id;
+                    Session["UserId"] = loginuser.RegisterId;
                     if (loginuser.RoleId == 1)
                         Session["Role"] = "Admin";
                     else if (loginuser.RoleId == 2)

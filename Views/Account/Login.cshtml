@@ -33,7 +33,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input id="urlPathid" type="hidden" value="@Url.Action("ValidateLoginUsers", "Account")" />
-                <input type="submit" value="Login" class="btn btn-primary"/>
+                <input type="submit" value="Login" class="btn btn-primary" />
                 <a href="Register" class="to_register"> Register </a>
             </div>
         </div>
@@ -42,6 +42,15 @@
 
 @section scripts{
     <script>
+        $(document).ready(function () {
+            $(function () {
+                var result = '@TempData["RegisterResultMessage"]';
+                if (result != '') {
+                    toastr.success("", result);
+                }
+            });
+        });
+
         $("#btnloginform").click(function (e) {
             e.preventDefault();
             var _this = $(this);

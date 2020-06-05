@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthCareAppointment.HealthCare_BLL.AccountModels;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -52,16 +53,6 @@ namespace HealthCareAppointment.HealthCare_BLL.Models
         public Doctors Doctors { get; set; }
 
         [NotMapped]
-        public ICollection<Patient> PatientList { get; set; }
-
-        [Required]
-        [Display(Name = "Patients")]
-        public int PatientId { get; set; }
-        [ForeignKey("PatientId")]
-
-        public Patient Patient { get; set; }
-
-        [NotMapped]
         public ICollection<TimeSlot> TimeSlotList { get; set; }
 
         [Required]
@@ -80,14 +71,21 @@ namespace HealthCareAppointment.HealthCare_BLL.Models
         [ForeignKey("SpecializationId")]
         public Specialization Specialization { get; set; }
 
+        [NotMapped]
+        public ICollection<UserRegisters> UserRegisterList { get; set; }
+
+        public int RegisterId { get; set; }
+        [ForeignKey("RegisterId")]
+        public UserRegisters UserRegisters { get; set; }
+
         public Appointment()
         {
             StateList = new Collection<States>();
             LocationList = new Collection<Locations>();
             DoctorList = new Collection<Doctors>();
-            PatientList = new Collection<Patient>();
             TimeSlotList = new Collection<TimeSlot>();
             SpecializationList = new Collection<Specialization>();
+            UserRegisterList = new Collection<UserRegisters>();
         }
     }
 }

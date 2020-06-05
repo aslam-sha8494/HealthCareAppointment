@@ -12,7 +12,7 @@ namespace HealthCareAppointment.Controllers.API
     [EnableCors(origins: "https://localhost:44386", headers: "*", methods: "*")]
     public class AppointmentController : ApiController
     {
-        log4net.ILog logger = log4net.LogManager.GetLogger(typeof(AccountController));
+        log4net.ILog logger = log4net.LogManager.GetLogger(typeof(AppointmentController));
         private readonly IUnitOfWork _unitOfWork;
 
         public AppointmentController(IUnitOfWork unitOfWork)

@@ -12,7 +12,7 @@ namespace HealthCareAppointment.HealthCare_BLL.AccountModels
     {
         [Key]
         [Required]
-        public int Id { get; set; }
+        public int RegisterId { get; set; }
 
         [Required]
         [EmailAddress]

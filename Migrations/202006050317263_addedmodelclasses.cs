@@ -3,7 +3,7 @@ namespace HealthCareAppointment.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialAllModelClasses : DbMigration
+    public partial class addedmodelclasses : DbMigration
     {
         public override void Up()
         {
@@ -91,14 +91,14 @@ namespace HealthCareAppointment.Migrations
                 "dbo.UserRegisters",
                 c => new
                 {
-                    Id = c.Int(nullable: false, identity: true),
+                    RegisterId = c.Int(nullable: false, identity: true),
                     UserName = c.String(nullable: false),
                     FullName = c.String(nullable: false, maxLength: 100),
                     Password = c.String(nullable: false, maxLength: 100),
                     PhoneNumber = c.String(nullable: false, maxLength: 10),
                     RoleId = c.Int(nullable: false),
                 })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => t.RegisterId)
                 .ForeignKey("dbo.UserRoles", t => t.RoleId)
                 .Index(t => t.RoleId);
 
@@ -195,23 +195,24 @@ namespace HealthCareAppointment.Migrations
                      StateId = c.Int(nullable: false),
                      LocationId = c.Int(nullable: false),
                      DoctorId = c.Int(nullable: false),
-                     PatientId = c.Int(nullable: false),
                      TimeSlotId = c.Int(nullable: false),
                      SpecializationId = c.Int(nullable: false),
+                     RegisterId = c.Int(nullable: false),
                  })
                  .PrimaryKey(t => t.AppointmentId)
-                 .ForeignKey("dbo.Doctors", t => t.DoctorId, cascadeDelete: true)
-                 .ForeignKey("dbo.Locations", t => t.LocationId, cascadeDelete: true)
-                 .ForeignKey("dbo.Patients", t => t.PatientId, cascadeDelete: true)
-                 .ForeignKey("dbo.Specializations", t => t.SpecializationId, cascadeDelete: true)
-                 .ForeignKey("dbo.States", t => t.StateId, cascadeDelete: true)
-                 .ForeignKey("dbo.TimeSlots", t => t.TimeSlotId, cascadeDelete: true)
+                 .ForeignKey("dbo.Doctors", t => t.DoctorId)
+                 .ForeignKey("dbo.Locations", t => t.LocationId)
+                 .ForeignKey("dbo.Specializations", t => t.SpecializationId)
+                 .ForeignKey("dbo.States", t => t.StateId)
+                 .ForeignKey("dbo.TimeSlots", t => t.TimeSlotId)
+                 .ForeignKey("dbo.UserRegisters", t => t.RegisterId)
                  .Index(t => t.StateId)
                  .Index(t => t.LocationId)
                  .Index(t => t.DoctorId)
-                 .Index(t => t.PatientId)
                  .Index(t => t.TimeSlotId)
-                 .Index(t => t.SpecializationId);
+                 .Index(t => t.SpecializationId)
+                 .Index(t => t.RegisterId);
+
         }
         
         public override void Down()
@@ -219,14 +220,14 @@ namespace HealthCareAppointment.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.UserRegisters", "RoleId", "dbo.UserRoles");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Patients", "StateId", "dbo.States");
+            DropForeignKey("dbo.Patients", "LocationId", "dbo.Locations");
+            DropForeignKey("dbo.Appointments", "RegisterId", "dbo.UserRegisters");
+            DropForeignKey("dbo.UserRegisters", "RoleId", "dbo.UserRoles");
             DropForeignKey("dbo.Appointments", "TimeSlotId", "dbo.TimeSlots");
             DropForeignKey("dbo.Appointments", "StateId", "dbo.States");
             DropForeignKey("dbo.Appointments", "SpecializationId", "dbo.Specializations");
-            DropForeignKey("dbo.Appointments", "PatientId", "dbo.Patients");
-            DropForeignKey("dbo.Patients", "StateId", "dbo.States");
-            DropForeignKey("dbo.Patients", "LocationId", "dbo.Locations");
             DropForeignKey("dbo.Appointments", "LocationId", "dbo.Locations");
             DropForeignKey("dbo.Appointments", "DoctorId", "dbo.Doctors");
             DropForeignKey("dbo.Doctors", "StateId", "dbo.States");
@@ -236,31 +237,31 @@ namespace HealthCareAppointment.Migrations
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.UserRegisters", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Patients", new[] { "LocationId" });
             DropIndex("dbo.Patients", new[] { "StateId" });
+            DropIndex("dbo.UserRegisters", new[] { "RoleId" });
             DropIndex("dbo.Locations", new[] { "StateId" });
             DropIndex("dbo.Doctors", new[] { "SpecializationId" });
             DropIndex("dbo.Doctors", new[] { "LocationId" });
             DropIndex("dbo.Doctors", new[] { "StateId" });
+            DropIndex("dbo.Appointments", new[] { "RegisterId" });
             DropIndex("dbo.Appointments", new[] { "SpecializationId" });
             DropIndex("dbo.Appointments", new[] { "TimeSlotId" });
-            DropIndex("dbo.Appointments", new[] { "PatientId" });
             DropIndex("dbo.Appointments", new[] { "DoctorId" });
             DropIndex("dbo.Appointments", new[] { "LocationId" });
             DropIndex("dbo.Appointments", new[] { "StateId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.UserRoles");
-            DropTable("dbo.UserRegisters");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.TimeSlots");
             DropTable("dbo.Patients");
+            DropTable("dbo.UserRoles");
+            DropTable("dbo.UserRegisters");
+            DropTable("dbo.TimeSlots");
             DropTable("dbo.Specializations");
             DropTable("dbo.States");
             DropTable("dbo.Locations");
